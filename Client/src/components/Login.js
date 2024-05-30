@@ -1,7 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../index';
+import {AppContext } from '../index';
 import { useNavigate  } from 'react-router-dom';
 import { login } from '../axiosAPI/Users.js';
+import { getProductswithlocation } from '../axiosAPI/Products.js';
 
 export default function Login() {
   
@@ -10,6 +12,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const {setProductList} = useContext(AppContext);
 
   const submitLogin = (e) => {
     e.preventDefault();
@@ -29,7 +32,20 @@ export default function Login() {
         {
         if(response.data.user)  
           {
+            console.log(response.data)
             setcurrentUser(response.data.user);
+            const fetchData = async () => {
+              try {
+                const products = await getProductswithlocation(response.data.user);        
+                setProductList(products);
+                console.log(products)
+              } catch (error) {
+                console.error('Error fetching data:', error);
+                setProductList([]);
+              }
+            };
+    
+            fetchData();
             if(response.data.user.userType ==="Seller"){
               navigate('/Seller/dashboard');
             }

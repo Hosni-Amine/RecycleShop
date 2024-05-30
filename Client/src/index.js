@@ -132,7 +132,7 @@ const updateProductItem = async (updatedProduct,id) => {
 
 
 return (  
-    <AppContext.Provider value={{setCartList,cartList,productList,addProductToCart,updatecartItem,updateProductItem,addProductToList,DeleteProductFromList}}>
+    <AppContext.Provider value={{setProductList,setCartList,cartList,productList,addProductToCart,updatecartItem,updateProductItem,addProductToList,DeleteProductFromList}}>
       <UserContext.Provider value={{currentUser,setcurrentUser}}>
         <BrowserRouter>
           <Navbar/>

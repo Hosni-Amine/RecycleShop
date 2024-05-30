@@ -27,7 +27,7 @@ export const getProducts = async (user) => {
 };
 
 export const getProductswithlocation = async (user) => {
-  if(user.userType==="Seller")
+  if(user && user.userType==="Seller")
     {
       try {
         console.log(user.id)

@@ -83,6 +83,7 @@ export default function Register() {
   const signupUser = async (newUser) => {
     try {
       setError("");
+      console.log(newUser);
       const response = await axios.post(`${BASE_URL}/register`, newUser);
       if(response) {
         

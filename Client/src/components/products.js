@@ -23,7 +23,7 @@ export default function Product() {
       window.history.pushState(null, '', window.location.pathname.replace('/addProduct', '')); // Remove "/add" from the URL
     }
   }, [addForm]);
-  useEffect(() => {
+  useEffect(() => { 
     if (editForm) {
       window.history.pushState(null, '', `/Seller/products/editProduct`); // Add "/edit/:id" to the URL
     } else {
@@ -59,7 +59,7 @@ export default function Product() {
                 style={{ maxWidth: "200px", marginTop: "20px" }}
                 onClick={toggleAddForm}
                 type="submit">
-                Add order
+                Add product
               </button>
             </div>
           )}

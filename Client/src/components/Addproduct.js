@@ -31,6 +31,7 @@ export default function AddProduct({ toggleAddForm }) {
   };
 
   const handleSubmit = async (event) => {
+    console.log(formData);
     event.preventDefault();
     if (checkValidation()) {
       const updatedFormData = new FormData();
@@ -47,7 +48,7 @@ export default function AddProduct({ toggleAddForm }) {
 
   const checkValidation = () => {
     const { name, description, price, quantity, image } = formData;
-    return name && description && !isNaN(parseFloat(price)) && parseFloat(price) > 0 && !isNaN(parseInt(quantity)) && parseInt(quantity) > 0 && image; // Ensure image is selected
+    return name && description && !isNaN(parseFloat(price)) && parseFloat(price) > 0 && !isNaN(parseInt(quantity)) && parseInt(quantity) > 0 && image;
   };
 
   return (

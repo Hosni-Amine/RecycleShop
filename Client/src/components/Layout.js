@@ -1,26 +1,36 @@
 import React, { useContext } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { AppContext } from '../index';
 import { UserContext } from '../index';
 import { useNavigate  } from 'react-router-dom';
-
-
-
+import { getProductswithlocation } from '../axiosAPI/Products.js';
 import '../App.css';
 
 export default function Navbar() 
     {  
       const navigate = useNavigate();
-      const {setCartList , cartList} = useContext(AppContext);
       const {currentUser,setcurrentUser} = useContext(UserContext);
-                  
+      const {setCartList , cartList,setProductList} = useContext(AppContext);
+
+
       const logoutUser = async () =>  {
         setCartList([]);
         setcurrentUser([]);
+                        
+        const fetchData = async () => {
+          try {
+            const products = await getProductswithlocation(null);        
+            setProductList(products);
+            console.log(products)
+          } catch (error) {
+            console.error('Error fetching data:', error);
+            setProductList([]);
+          }
+        };
+
+        fetchData();
         navigate('/Auth/login');
       };
       let productPrice = cartList.reduce((totalQuantity, item) => totalQuantity + item.quantity*item.price, 0);
